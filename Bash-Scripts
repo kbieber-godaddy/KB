@@ -1,0 +1,358 @@
+########################################
+Add a line after each variable  -- adds native vlan info every time it sees int
+sed '/int/ i\ switchport access vlan 380' rr
+########################################
+
+Take a list paste it in excel each variable next to eachother and do a find and replace on it
+
+
+sed -e '/^$/d' raw > scriptv1
+cat scriptv1 | awk -F' ' '{ print $1, $2 }' > scriptv2
+sed -e 's/ /\//' -e 's/^/s\//' -e 's/[ \t]*$//' -e 's/$/\//' -e 's/$/g/' scriptv2 > done_script
+
+
+sed -e '/^/device 1' base > test1
+
+
+##########################################
+Print lines
+cat rw | awk -F' ' '{ print $2, $1 }'
+
+cat rrew | awk -F"(" '{ print $1 }'
+
+for :
+cat test1 | awk -F':' '{ print $1 }'
+##########################################
+Delete Blank Spaces
+sed -e '/^ *$/d' test > test1
+
+sed -e '/^ *$/d' base > base1
+
+
+##########################################
+ACE vip check
+original file should contain ACE config
+
+cat lbma10 | grep -i -B1 virtual > albma10
+cat albma10 | awk -F' ' '{ print $3 }' > test
+sed -e '/^$/d' test > test1
+sed '$!N;s/\n/ /' test1
+
+##########################################
+Script to replace subnets
+
+
+cat test | awk -F' ' '{ print $1 }' > test1212
+
+sed -e 's/\/16/ 255.255.0.0 10.255.36.254/' -e 's/\/17/ 255.255.128.0 10.255.36.254/' -e 's/\/20/ 255.255.240.0 10.255.36.254/' -e 's/\/22/ 255.255.252.0 10.255.36.254/' -e 's/\/23/ 255.255.254.0 10.255.36.254/' -e 's/\/24/ 255.255.255.0 10.255.36.254/' -e 's/\/25/ 255.255.255.128 10.255.36.254/' -e 's/\/26/ 255.255.255.192 10.255.36.254/' -e 's/\/27/ 255.255.255.224 10.255.36.254/' -e 's/\/28/ 255.255.255.240 10.255.36.254/' -e 's/\/29/ 255.255.255.248 10.255.36.254/' -e 's/\/30/ 255.255.255.252 10.255.36.254/' -e 's/\/31/ 255.255.255.254 10.255.36.254/' -e 's/\/32/ 255.255.255.255 10.255.36.254/' test1212 > done1
+
+sed -e 's/^/route dcxover /' -e 's/$/ 1/' done1 > done
+
+##########################################
+grep multiple lines
+
+
+grep -P "\b(class-map match-all|match virtual-address)\b"
+Script to replace reverse subnets
+
+
+sed -e 's/\0.0.0.255/\/24/' -e 's/0.0.1.255/\/23/' -e 's/0.0.0.7/\/29/' -e 's/0.0.0.127/\/25/' hhh > done1
+sed -e 's/ //' done1 > test1
+
+
+##########################################
+how to do a unique?
+
+
+sort ggh2 | uniq -u
+##########################################
+delete trailing white spaces
+sed 's/[ \t]*$//'
+##########################################
+
+Email ports
+
+delete current raw file
+sh raw.sh
+
+Script additions
+sh excel.sh
+
+
+
+cat emlb | grep -v "label_me" > emlb1
+cat emlb1 | grep -v "staging" > emlb2
+cat emlb2 | grep -v "ASIC" > emlb3
+cat emlb3 | awk -F'\/\/' '{ print $1, $3, $5 }' > emlb4
+
+
+
+cat emla | grep -v "label_me" > emla1
+cat emla1 | grep -v "staging" > emla2
+cat emla2 | grep -v "ASIC" > emla3
+cat emla3 | awk -F'\/\/' '{ print $1, $3, $5 }' > emla4
+
+##########################################
+Double space and add a line in between
+
+sed '/^$/d' kkfd | sed G > hhn
+sed 's/^$/switchport access vlan 380' hhn
+
+##########################################
+Convert to expect
+
+sed -e 's/^/expect \"\#\" \{ send \"/' -e 's/$/\\r\" \}/' test
+
+sed -e 's/^/expect \"\#\" \{ send \"/' -e 's/$/\\r\" \}/' config > config1
+
+Remove $
+sed -e '/\$/d' -e 's/^/expect \"\#\" \{ send \"/' -e 's/$/\\r\" \}/' test >> test2
+
+##########################################
+Convert Jarrods phase 1 output to cut/paste
+
+ sed -e 's/\,//g' -e 's/"//g' -e 's/\[//g' -e 's/\]//g' bbd
+
+#################################################
+
+End of line issues?
+
+Convert dos2 unix format 
+IE
+dos2unix "FILENAME"
+
+End of line should look right after that
+
+#########################
+grep for a word and pull file it's in within directory
+
+grep assa0306-02 * -R
+
+
+##########################
+Pull out all variables from a template
+
+awk -F "[__]" '{ for (a=2; a<NF; a+=2) print $a }' base > draft
+sort -u draft > draft1
+sed -e s/^/_/ -e s/$/_/ draft1 > draft2
+
+sed '/^$/d' draft2
+
+
+#########
+Redo descriptions
+
+
+sed -e 's/Eth/interface Eth/' -e 's/e1/%desc N:e1/' base>test1
+cat test1 |tr '%' '\012' 
+
+
+sed -e 's/Po/interface Po/' -e 's/po/%desc N:po/' base>test1
+cat test1 |tr '%' '\012' 
+
+
+########################
+pull unused ports
+
+cgrep LABEL_ME > 1
+cat 1 | grep -i lfas > 2
+cat 2 | grep -i iad2.gdg > 3
+cat 3 | grep 01.iad2.gdg > 4
+cat 4 | uniq > 5
+cat 5 | awk -F' ' '{ print $1}' > 6
+cat 6 | awk -F'.gdg' '{ print $1}' > 7
+uniq 7 > 20
+rm -r Kevin1
+touch Kevin1
+sed -e 's/ //' 20 > 8
+sed -e 's/^/cat 4 | grep -c >> Kevin1 /' 8 > Final
+bash Final 
+paste 8 Kevin1 > DONE1
+uniq DONE1 > FINAL1
+cat FINAL1 | awk '{ print $1, $2 }'
+
+
+################################
+
+BGP grep for maintnenace and bleed off
+
+cat base | grep -E 'template peer|address-family|route-map'
+
+#############################
+email script
+
+
+
+fexsd0319-01    e102/1/6        SFP-GLC-T       p3plgemini13-01 eth0    206     118
+
+awk '{OFS=RS;$1=$1}1' hhg > file1
+awk '{OFS=RS;$1=$1}1' file1
+paste {var1,file1} | awk '{print $1,$2,$3,$6}' > file3
+sed -e '/^$/d' file3 > file4
+sed -e 's/\//\\\//g' file4 > file5
+cat file5 | awk -F' ' '{ print $1, $2, $3, $4, $5 }' > file6
+sed -e 's/ /\//' -e 's/^/s\//' -e 's/[ \t]*$//' -e 's/$/\//' -e 's/$/g/' file6 > file7
+sed -f file7 base1 > email1
+cat email1
+
+catvar1
+[kbieber@a2plshell001 ~]$ cat var1
+
+_interface_
+
+_server-name_
+_server-port_
+_port-channel_
+_vlan_
+[kbieber@
+
+_interface_    e102/1/6
+_server-name_    p3plgemini13-01
+_server-port_    eth0
+_port-channel_    po206
+_vlan_    118
+
+interface Port-channel_port-channel_
+ description Po237 // vlan_vlan_  // _server-name_ // ???????? // bond0
+ switchport
+ switchport access vlan _vlan_ 
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ 
+ 
+interface _interface_
+description _interface_ // vlan_vlan_  // _server-name_ // ????? // eth0
+switchport
+switchport access vlan _vlan_ 
+switchport mode access
+spanning-tree portfast
+spanning-tree bpduguard enable
+channel-group _port-channel_ mode active
+
+interface _interface_
+description _interface_ // vlan_vlan_  // _server-name_ // ????? // eth2
+switchport
+switchport access vlan _vlan_ 
+switchport mode access
+spanning-tree portfast
+spanning-tree bpduguard enable
+channel-group _port-channel_ mode active
+
+#############################
+Firewall FOS checks
+
+show conn on fw 
+sh base.sh --> add here!
+
+#!/bin/bash
+echo "Add excel variable ctrl-d when done"
+keyvariable=$(cat > base)
+
+cat base | awk -F' ' '{ print $3 }' > FOS-only
+cat FOS-only | awk -F':' ' { print $1 }' > FOS-IPs
+uniq -c FOS-IPs > FOS-FINAL
+sort -n FOS-FINAL
+
+
+MAKE SURE TO SCROLL THROUGH AS TRIPLE DIGIT NUMBERS DON'T SHOW UP AT TOP
+
+###################################
+
+Grep fw connections for certain subnets. ex is for heg
+
+for cleaning up list
+cat base | grep -v -e 216.69.136 -e 104.238.65 -e 45.40.130 >test1
+
+for printing do the following
+cat test1 | awk -F'.' '{ print $1, $2 }' >test3
+
+sed -e 's/ /./g' test3 > test4
+
+sed -e 's/e../ /g' test4 > test5
+
+
+create list like below to transpose do the following
+$ tr '\n' ' ' < heg
+
+cat base | grep -e 5.35 -e 5.175 -e 37.61 -e 37.122 -e 37.200 -e 46.32 -e 46.22 -e 46.163 -e 46.252 -e 46.231 -e 62.75 -e 62.138 -e 77.91 -e 78.138 -e 79.170 -e 80.67 -e 80.86 -e 80.90 -e 80.237 -e 80.242 -e 80.242 -e 80.246 -e 81.21 -e 83.142 -e 83.169 -e 83.220 -e 85.25 -e 85.25 -e 85.93 -e 85.119 -e 85.119 -e 87.119 -e 87.230 -e 88.80 -e 89.19 -e 91.109 -e 91.198 -e 91.223 -e 91.235 -e 91.240 -e 91.250 -e 92.42 -e 92.43 -e 92.51 -e 92.60 -e 93.92 -e 93.180 -e 93.187 -e 94.136 -e 94.199 -e 95.131 -e 109.68 -e 109.104 -e 109.239 -e 134.119 -e 141.0 -e 171.25 -e 176.28 -e 176.32 -e 176.221 -e 178.77 -e 185.2 -e 185.21 -e 185.34 -e 185.85 -e 185.136 -e 185.136 -e 185.136 -e 185.136 -e 185.139 -e 188.93 -e 188.138 -e 193.33 -e 193.34 -e 193.37 -e 193.164 -e 193.169 -e 193.194 -e 193.201 -e 193.227 -e 194.6 -e 194.30 -e 194.31 -e 194.39 -e 194.39 -e 194.116 -e 194.145 -e 195.10 -e 195.66 -e 195.78 -e 195.95 -e 195.128 -e 195.160 -e 195.191 -e 195.191 -e 195.225 -e 212.40 -e 212.48 -e 212.67 -e 213.131 -e 213.174 -e 213.203 -e 217.8 -e 217.115 -e 217.115 -e 217.118 -e 217.119 -e 217.172 -e 217.172 -e 217.199 -e 217.199
+
+
+###################################
+IP search CGREP
+
+#!/bin/bash
+varname=$1
+/usr/local/share/netshell/cgrep.sh $varname > ip12
+cat ip12 | grep -v -e permit -e access -e network-object
+
+#####################################
+sort asr info
+
+netexec --commands 'admin','show platform' --dialect xr --platform asr9000 --no-verbose
+
+cat rw | awk -F'     ' '{ print $2 }' > test
+sed -e '/^ *$/d' test > test1
+sort -u test1'
+#####################################
+
+LB Audit Script
+
+cat base | grep Up > vip1
+cat vip1 | awk -F"*" '{ print $2}' > vip2
+cat vip2 | awk -F" " '{ print $1}' > vip3
+
+cat vip3
+
+cat base | grep -v Up > vip1
+cat vip1 | awk -F"*" '{ print $2}' > vip2
+cat vip2 | awk -F" " '{ print $1}' > vip3
+
+cat vip3
+
+#####################################
+LB DSR L2 audit script
+
+
+cat base | grep -B 9 no-dest-nat > test
+cat test | grep virtual-server > test1
+
+####################################
+Pull out neighbors L2
+
+cat base | grep -E 'start|47|48|49|50' > 2
+
+####################################
+
+A10 Lb connection Scan
+show session on A10.  use the lines below to pull out the source IP
+
+Print lines
+cat base | awk -F' ' '{ print $2,}' > test1
+for :
+cat test1 | awk -F':' '{ print $1 }' > test2
+
+Append to a file ACL
+
+sample file
+permit ip 2.56.102.0/23
+permit ip 2.59.22.0/23
+permit ip 2.56.102.0/23
+
+Script to apply to sample file
+sed s,$,----45.40.165.132/28, base > test
+sed 's/----/ /g' test > test1
+cat test1
+
+
+Append to a file ACL
+
+sample file
+permit ip 2.56.102.0/23
+permit ip 2.59.22.0/23
+permit ip 2.56.102.0/23
+
+Script to apply to sample file
+sed s,$,----45.40.165.132/28, base > test
+sed 's/----/ /g' test > test1
+cat test1
